@@ -1,10 +1,8 @@
 package itstep.learning;
 
-import itstep.learning.oop.Book;
-import itstep.learning.oop.Journal;
-import itstep.learning.oop.Library;
-import itstep.learning.oop.Newspaper;
-import itstep.learning.oop.Date;
+import itstep.learning.oop.*;
+
+import java.text.ParseException;
 
 /**
  * Hello world!
@@ -18,9 +16,22 @@ public class App  {
         library.add( new Book( "Shevchenko", "Kobzar" ) ) ;         // разные реализации
         library.add( new Journal( 10, "ArgC & ArgV" ) ) ;           // (Book, Journal)
         library.add( new Journal( 5, "Nature" ) ) ;                 // Одного интерфейса (Literature)
-        library.add( new Newspaper( new Date(2022, 6, 26), "The New York Times"));
-        library.add( new Newspaper( new Date( 2023, 1, 10), "The Daily News"));
+        try {
+            library.add( new Newspaper( "26.06.2022", "The New York Times"));
+            library.add( new Newspaper( "10.01.2023", "The Daily News"));
+            library.add( new Comics("Marvel", 1, "13.09.2022"));
+            library.add( new Hologram("Gold apple", "31.01.2023"));
+        }
+        catch (ParseException e) {
+            System.out.println("Date parse exception");
+        }
+        library.add( new AudioBook("Kobzar. Shevchenko", "SuperSound Studio"));
 
-        library.printFunds() ;
+        System.out.println("----------Funds----------");
+        library.printFunds();
+        System.out.println("\n---------Played---------");
+        library.playAll();
+        System.out.println("\n--------Presented--------");
+        library.toPresentAll();
     }
 }
