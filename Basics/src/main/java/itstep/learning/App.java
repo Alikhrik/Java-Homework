@@ -1,9 +1,9 @@
 package itstep.learning;
 
-import itstep.learning.files.DirDemo;
-import itstep.learning.files.IoDemo;
+import itstep.learning.files.*;
 import itstep.learning.oop.*;
 
+import java.io.File;
 import java.text.ParseException;
 
 /**
@@ -11,7 +11,18 @@ import java.text.ParseException;
  *
  */
 public class App  {
-    public static void main( String[] args ) {
+    public static void main( String[] args ) { // files homework 1
+        RandFileGenN1 generator = new RandFileGenN1();
+        generator.GenFile();
+        File file = generator.getFile();
+
+        LongestLineFinder finder = new LongestLineFinder();
+        finder.Find(file);
+        CreatedResult result = finder.GetResult();
+
+        System.out.println(result);
+    }
+    public static void files_cw1( String[] args ) {
         new IoDemo().run();
         new DirDemo().run();
     }
