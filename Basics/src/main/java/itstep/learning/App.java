@@ -1,17 +1,36 @@
 package itstep.learning;
 
+import itstep.learning.db.DbDemo;
 import itstep.learning.files.*;
 import itstep.learning.oop.*;
 
 import java.io.File;
 import java.text.ParseException;
+import java.util.Scanner;
 
 /**
  * Hello world!
  *
  */
 public class App  {
-    public static void main( String[] args ) { // files homework 1
+    public static void main( String[] args ) {
+        Scanner in = new Scanner(System.in);
+
+        DbDemo db = new DbDemo();
+        db.Connection();
+        System.out.println("---------- All Rows ----------");
+        db.showAllRows();
+        System.out.print("\nEnter string for search: ");
+        String in_string = in.nextLine();
+        System.out.println("---------- Rows By String ----------");
+        db.selectRowsByString(in_string);
+        System.out.print("\nEnter int for search: ");
+        int in_number = in.nextInt();
+        System.out.println("---------- Rows By Int ----------");
+        db.selectRowsByInt(in_number);
+    }
+
+    public static void files_hw1( String[] args ) { // files homework 1
         RandFileGenN1 generator = new RandFileGenN1();
         generator.GenFile();
         File file = generator.getFile();
@@ -22,10 +41,12 @@ public class App  {
 
         System.out.println(result);
     }
+
     public static void files_cw1( String[] args ) {
         new IoDemo().run();
         new DirDemo().run();
     }
+
     public static void oop( String[] args ) {
         Library library = new Library() ;
 
