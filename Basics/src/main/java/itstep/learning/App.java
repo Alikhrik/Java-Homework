@@ -1,7 +1,10 @@
 package itstep.learning;
 
+import com.google.inject.Guice;
 import itstep.learning.db.DbDemo;
 import itstep.learning.files.*;
+import itstep.learning.ioc.AppModule;
+import itstep.learning.ioc.Starter;
 import itstep.learning.oop.*;
 
 import java.io.File;
@@ -10,10 +13,16 @@ import java.util.Scanner;
 
 /**
  * Hello world!
- *
  */
-public class App  {
-    public static void main( String[] args ) {
+public class App {
+    public static void main(String[] args) {
+        Guice
+                .createInjector(new AppModule())
+                .getInstance(Starter.class)
+                .run();
+    }
+
+    public static void db_hw1(String[] args) {
         Scanner in = new Scanner(System.in);
 
         DbDemo db = new DbDemo();
@@ -30,7 +39,7 @@ public class App  {
         db.selectRowsByInt(in_number);
     }
 
-    public static void files_hw1( String[] args ) { // files homework 1
+    public static void files_hw1(String[] args) { // files homework 1
         RandFileGenN1 generator = new RandFileGenN1();
         generator.GenFile();
         File file = generator.getFile();
@@ -42,28 +51,27 @@ public class App  {
         System.out.println(result);
     }
 
-    public static void files_cw1( String[] args ) {
+    public static void files_cw1(String[] args) {
         new IoDemo().run();
         new DirDemo().run();
     }
 
-    public static void oop( String[] args ) {
-        Library library = new Library() ;
+    public static void oop(String[] args) {
+        Library library = new Library();
 
-        library.add( new Book( "Knuth", "Art of programming" ) ) ;  // Полиморфизм -
-        library.add( new Book( "Shevchenko", "Kobzar" ) ) ;         // разные реализации
-        library.add( new Journal( 10, "ArgC & ArgV" ) ) ;           // (Book, Journal)
-        library.add( new Journal( 5, "Nature" ) ) ;                 // Одного интерфейса (Literature)
+        library.add(new Book("Knuth", "Art of programming"));  // Полиморфизм -
+        library.add(new Book("Shevchenko", "Kobzar"));         // разные реализации
+        library.add(new Journal(10, "ArgC & ArgV"));           // (Book, Journal)
+        library.add(new Journal(5, "Nature"));                 // Одного интерфейса (Literature)
         try {
-            library.add( new Newspaper( "26.06.2022", "The New York Times"));
-            library.add( new Newspaper( "10.01.2023", "The Daily News"));
-            library.add( new Comics("Marvel", 1, "13.09.2022"));
-            library.add( new Hologram("Gold apple", "31.01.2023"));
-        }
-        catch (ParseException e) {
+            library.add(new Newspaper("26.06.2022", "The New York Times"));
+            library.add(new Newspaper("10.01.2023", "The Daily News"));
+            library.add(new Comics("Marvel", 1, "13.09.2022"));
+            library.add(new Hologram("Gold apple", "31.01.2023"));
+        } catch (ParseException e) {
             System.out.println("Date parse exception");
         }
-        library.add( new AudioBook("Kobzar. Shevchenko", "SuperSound Studio"));
+        library.add(new AudioBook("Kobzar. Shevchenko", "SuperSound Studio"));
 
         System.out.println("----------Funds----------");
         library.printFunds();
