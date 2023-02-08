@@ -3,6 +3,9 @@ package itstep.learning.ioc;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class Starter {
     @Inject
     private Service1 service1;
@@ -34,6 +37,8 @@ public class Starter {
     @Inject
     CtrDemo ctrDemo;
 
+    @Inject IConfigService config;
+
     public void run() {
         System.out.println("DI demo");
         service1.show();
@@ -51,6 +56,14 @@ public class Starter {
         System.out.println(oreCs);
 
         ctrDemo.show();
+
+
+        Path conf_file_path = Paths.get("config.ini");
+        config.setConfigFile(conf_file_path);
+
+        String par = config.getParameter("key");
+
+        System.out.println(par);
     }
 }
       

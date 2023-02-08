@@ -25,5 +25,7 @@ public class AppModule extends AbstractModule {
         bind(String.class)
                 .annotatedWith(Names.named("OracleConnectionString"))
                 .toInstance("The Oracle Connection String");
+
+        bind(IConfigService.class).to(iniConfig.class);
     }
 }
