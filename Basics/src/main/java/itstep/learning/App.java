@@ -6,6 +6,9 @@ import itstep.learning.files.*;
 import itstep.learning.ioc.AppModule;
 import itstep.learning.ioc.Starter;
 import itstep.learning.oop.*;
+import itstep.learning.threads.CookDirector;
+import itstep.learning.threads.FastBreakfastCook;
+import itstep.learning.threads.ICookOfBreakfast;
 
 import java.io.File;
 import java.text.ParseException;
@@ -15,7 +18,16 @@ import java.util.Scanner;
  * Hello world!
  */
 public class App {
+
     public static void main(String[] args) {
+        FastBreakfastCook cook = new FastBreakfastCook();
+        CookDirector director = new CookDirector(cook);
+        director.MakeFastBreakfast();
+
+        System.out.println(cook.getResult().toString());
+    }
+
+    public static void ioc_cw_and_hw1(String[] args) {
         Guice
                 .createInjector(new AppModule())
                 .getInstance(Starter.class)
