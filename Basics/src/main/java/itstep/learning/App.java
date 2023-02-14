@@ -7,6 +7,7 @@ import itstep.learning.ioc.AppModule;
 import itstep.learning.ioc.Starter;
 import itstep.learning.oop.*;
 import itstep.learning.threads.CookDirector;
+import itstep.learning.threads.Discriminant;
 import itstep.learning.threads.FastBreakfastCook;
 import itstep.learning.threads.ICookOfBreakfast;
 
@@ -18,8 +19,11 @@ import java.util.Scanner;
  * Hello world!
  */
 public class App {
-
     public static void main(String[] args) {
+        new Discriminant().calculate(2,3, 1);
+    }
+
+    public static void threads_hw1(String[] args) {
         FastBreakfastCook cook = new FastBreakfastCook();
         CookDirector director = new CookDirector(cook);
         director.MakeFastBreakfast();
